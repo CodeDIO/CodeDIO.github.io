@@ -152,6 +152,58 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-解决jupyter打开之后不能直接跳转到浏览器的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="jupyter介绍"><a href="#jupyter介绍" class="headerlink" title="jupyter介绍"></a>jupyter介绍</h2><p>jupyter的全称为Jupyter Notebook，之前一度被称为（IPython notebook），是一种交互式的程序运行笔记本，它现在支持着40多种的编程语言，可以说是非常高效的语言测试环境。<br>jupyter notebook的本质其实是一个web应用程序，便于创建和共享程序文档，可以将实时代码，框图，数学方程等等集成到一个环境当中。经常被用于数据处理，系统建模和机器学习等。</p>
+<h2 id="jupyter的安装"><a href="#jupyter的安装" class="headerlink" title="jupyter的安装"></a>jupyter的安装</h2><p>jupyter的安装是可以随anconda的下载一并下载的，在这里不做过多的介绍，读者有兴趣可以参考其他博主的anconda安装过程和配置过程</p>
+<h2 id="笔者使用jupyter时遇到的问题"><a href="#笔者使用jupyter时遇到的问题" class="headerlink" title="笔者使用jupyter时遇到的问题"></a>笔者使用jupyter时遇到的问题</h2><p>在之前笔者每每打开jupyter 的时候总是会遇到以下的窗口提示，导致我每次都不得不手动复制窗口提示中给出的URL粘贴到浏览器中运行，这样做未免太过于麻烦</p>
+<p><img src="https://img-blog.csdnimg.cn/20190927130150261.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjY2OTg3,size_16,color_FFFFFF,t_70" alt="窗口提示给了三种URL，每次必须手动复制粘贴前往jupyter">在查阅了相关资料之后，发现jupyter是可可以通过设置直接跳转到浏览器当中的，具体操作步骤为：<br>用管理员方式打开anconda prompt，之后再其中输入：<br>jupyter notebook –generate-config<img src="https://img-blog.csdnimg.cn/20190927130801241.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjY2OTg3,size_16,color_FFFFFF,t_70" alt="因为我之前用过这个命令，所以这里提示是否覆盖原来的路径"><br>这之后打开窗口中提示的路径，打开新生成的这个文件，在文件的最末尾添加上：</p>
+<p>#c.NotebookApp.browser = ‘’<br>import webbrowser<br>webbrowser.register(‘chrome’,None,webbrowser.GenericBrowser(u’C:\Users\联想\AppData\Local\Google\Chrome\Application\chrome.exe’))<br>c.NotebookApp.browser = ‘chrome’<br>当然其中这个Chrome浏览器的路径要分别依据个人电脑里的路径，查看本路径的方法为打开Chrome快捷方式的属性查看。特别需要注意的是，一定要用双斜杠代替单斜杠，不然会发生字符编码错误。<br><img src="https://img-blog.csdnimg.cn/20190927131727839.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjY2OTg3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如此编辑之后，每当打开jupyter之后都能直接跳转到浏览器的jupyter的运行界面。<br><img src="https://img-blog.csdnimg.cn/20190927131648695.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjY2OTg3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/27/解决jupyter打开之后不能直接跳转到浏览器的问题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-《pytorch深度学习原理与pytorch实战》第三章 单车预测器1.0勘误（可能版本有别）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
