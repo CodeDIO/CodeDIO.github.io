@@ -152,6 +152,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-python语法：_作为函数中参数调用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/29/python语法：_作为函数中参数调用/">python中*号的作用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/29/python语法：_作为函数中参数调用/" class="archive-article-date">
+  	<time datetime="2019-09-29T12:38:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>做这篇博客的起因是在看<a href="http://product.dangdang.com/25231551.html" target="_blank" rel="noopener">《深度学习之tensorflow入门原理与进阶实战》</a>的时候，在第一章遇到了np.random.randn(*train_X.shape)的骚操作，一时没有翻过楞来，于是想收集并总结一波星号在python语法中的运用。</p>
+<h2 id="（-星号）在python中的几个作用："><a href="#（-星号）在python中的几个作用：" class="headerlink" title="（*星号）在python中的几个作用："></a>（*星号）在python中的几个作用：</h2><h4 id="1、作为乘法运算符使用："><a href="#1、作为乘法运算符使用：" class="headerlink" title="1、作为乘法运算符使用："></a>1、作为乘法运算符使用：</h4><p>当一个变量与另一个变量用*连接并运算时，是作为乘法运算符来使用的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c = a * b</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、作为次幂号使用："><a href="#2、作为次幂号使用：" class="headerlink" title="2、作为次幂号使用："></a>2、作为次幂号使用：</h4><p>当两个*号把两个数字变量相连时，是作为次幂号来使用的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">2</span></span><br><span class="line">b = <span class="number">3</span></span><br><span class="line">c = a ** b</span><br><span class="line">print(c)</span><br><span class="line"><span class="comment">#输出为</span></span><br><span class="line"><span class="number">8</span>  <span class="comment">#即2^3为8</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="3、作为参数通配符使用-在定义函数的过程中-："><a href="#3、作为参数通配符使用-在定义函数的过程中-：" class="headerlink" title="3、作为参数通配符使用(在定义函数的过程中)："></a>3、作为参数通配符使用(在定义函数的过程中)：</h6><p>这在你想要的使用参数但你又不知道参数的个数有多少个时使用，大多用在元组或字典当</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_tuple</span><span class="params">(*args)</span>:</span></span><br><span class="line">	<span class="keyword">for</span> arg <span class="keyword">in</span> args:</span><br><span class="line">		print(arg)</span><br><span class="line">print_tuple(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这样输出的结果为一个刚刚自己填入的数据列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<p>倘若要输出字典，则可以用**，具体操作如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_dict</span><span class="params">(**args)</span>:</span></span><br><span class="line">	print(args)</span><br><span class="line">print_dict(Wu=<span class="string">'Sunquan'</span>,Wei=<span class="string">'Caocao'</span>,Shu=<span class="string">'LiuBei'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这样输出为一个刚刚填入的字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'Wu'</span>: <span class="string">'Sunquan'</span>, <span class="string">'Wei'</span>: <span class="string">'Caocao'</span>, <span class="string">'Shu'</span>: <span class="string">'LiuBei'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="4、作为解构操作符使用："><a href="#4、作为解构操作符使用：" class="headerlink" title="4、作为解构操作符使用："></a>4、作为解构操作符使用：</h6><p>这种应用就是我在文章开头指出的应用，==np.random.randn(*train_X.shape)==<br>书上还是很贴心地加上了一句解释，上述语句可以等价于np.random.randn(100),这里的100是trian_X列表的长度。下面来仔细分析一下这个语法：<br>.shape是np对象的一个属性，它显示的是该np对象的维度，返回的是一个元组。打个比方，倘若我的np对象是[[1,2,3],[4,5,6]]，则其shape属性的值就为(2,3)。<br>再来看看   * 这个操作，在python中测试</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">print(*a)</span><br></pre></td></tr></table></figure>
+
+<p>其输出为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看出，<em>a这个操作将a本身是元组的这个属性解构了（拆开了）<br>而在本书中此处，trian_X的维度为(100,)，它是一个数组，没有第二个维度，所以</em>train_X.shape表示的就是 ==_解构_（100，）==，其值即为100</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/29/python语法：_作为函数中参数调用/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-解决jupyter打开之后不能直接跳转到浏览器的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
