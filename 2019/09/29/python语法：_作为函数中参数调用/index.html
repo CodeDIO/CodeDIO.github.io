@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="zhangxys blogs">
 <meta property="og:description" content="做这篇博客的起因是在看《深度学习之tensorflow入门原理与进阶实战》的时候，在第一章遇到了np.random.randn(*train_X.shape)的骚操作，一时没有翻过楞来，于是想收集并总结一波星号在python语法中的运用。 （*星号）在python中的几个作用：1、作为乘法运算符使用：当一个变量与另一个变量用*连接并运算时，是作为乘法运算符来使用的 1c = a * b  2、作为">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-29T12:49:54.742Z">
+<meta property="og:updated_time" content="2019-09-29T12:54:29.390Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python中*号的作用">
 <meta name="twitter:description" content="做这篇博客的起因是在看《深度学习之tensorflow入门原理与进阶实战》的时候，在第一章遇到了np.random.randn(*train_X.shape)的骚操作，一时没有翻过楞来，于是想收集并总结一波星号在python语法中的运用。 （*星号）在python中的几个作用：1、作为乘法运算符使用：当一个变量与另一个变量用*连接并运算时，是作为乘法运算符来使用的 1c = a * b  2、作为">
@@ -199,7 +199,7 @@
 <p>其输出为</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
 
-<p>可以看出，<em>a这个操作将a本身是元组的这个属性解构了（拆开了）<br>而在本书中此处，trian_X的维度为(100,)，它是一个数组，没有第二个维度，所以</em>train_X.shape表示的就是 解构_（100，），其值即为100</p>
+<p>可以看出，<em>a这个操作将a本身是元组的这个属性解构了（拆开了）<br>而在本书中此处，trian_X的维度为(100,)，它是一个数组，没有第二个维度，所以</em>train_X.shape表示的就是 解构（100，），其值即为100</p>
 
       
 
