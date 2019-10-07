@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | zhangxys blogs</title>
+  <title>tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释 | zhangxys blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zhangxys blogs">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="问题的发现今天在尝试实现《深度学习之TensorFlow入门、原理与进阶实战》的时候书写了一段代码，其中有一行代码我甚是纠结了半天，代码如下： 1_,c = sess.run([optimizer,cost],feed_dict=&amp;#123;x:batch_xs,y:batch_yx&amp;#125;)  就是这样一行代码的头部_,c的操作看得我迷了半天，为什么会有这样的表达，在我网上冲浪并且询问大佬过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释">
+<meta property="og:url" content="http://yoursite.com/2019/10/07/tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释/index.html">
 <meta property="og:site_name" content="zhangxys blogs">
+<meta property="og:description" content="问题的发现今天在尝试实现《深度学习之TensorFlow入门、原理与进阶实战》的时候书写了一段代码，其中有一行代码我甚是纠结了半天，代码如下： 1_,c = sess.run([optimizer,cost],feed_dict=&amp;#123;x:batch_xs,y:batch_yx&amp;#125;)  就是这样一行代码的头部_,c的操作看得我迷了半天，为什么会有这样的表达，在我网上冲浪并且询问大佬过">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-07T13:24:42.809Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhangxys blogs">
+<meta name="twitter:title" content="tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释">
+<meta name="twitter:description" content="问题的发现今天在尝试实现《深度学习之TensorFlow入门、原理与进阶实战》的时候书写了一段代码，其中有一行代码我甚是纠结了半天，代码如下： 1_,c = sess.run([optimizer,cost],feed_dict=&amp;#123;x:batch_xs,y:batch_yx&amp;#125;)  就是这样一行代码的头部_,c的操作看得我迷了半天，为什么会有这样的表达，在我网上冲浪并且询问大佬过">
   
     <link rel="alternative" href="/atom.xml" title="zhangxys blogs" type="application/atom+xml">
   
@@ -150,184 +154,165 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/07/tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释/" class="archive-article-date">
+
+        
+        <a href="/2019/10/07/tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释/" class="archive-article-date">
   	<time datetime="2019-10-07T13:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/07/tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释/">tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题的发现"><a href="#问题的发现" class="headerlink" title="问题的发现"></a>问题的发现</h2><p>今天在尝试实现《<a href="http://product.dangdang.com/25231551.html" target="_blank" rel="noopener">深度学习之TensorFlow入门、原理与进阶实战</a>》的时候书写了一段代码，其中有一行代码我甚是纠结了半天，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_,c = sess.run([optimizer,cost],feed_dict=&#123;x:batch_xs,y:batch_yx&#125;)</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<p>就是这样一行代码的头部_,c的操作看得我迷了半天，为什么会有这样的表达，在我网上冲浪并且询问大佬过后终于明白了这的代码这样书写的原因。</p>
+<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>在python运行的过程中，往往会出现需要运算但是不需要其返回值的情况出现，即：我需要你运算一下，但是我不需要再操作你的结果（是不是很jian哈哈哈哈）。而这里的情况就是如此，代码中一个session中让两个参数都运算了，但是在后续的程序中，我们只需要操作cost这个变量而不需要操作optimizer这个变量。注意，这时候下划线就起作用了，在查阅了python的官方关于下划线的文档之后，发现在多个参数返回运算时，下划线可以充当一个类似占位符一样的作用，仅仅表示这有一个参数而不去指明它的名称（因为后续操作不到这个参数，所以不需要指明）。</p>
+<p>这样理解以后，我将上述一行代码拆分成了两行代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sess.run(optimizer,feed_dict=&#123;x:batch_xs,y:batch_ys&#125;)</span><br><span class="line">c = sess.run(cost,feed_dict=&#123;x:batch_xs,y:batch_ys&#125;)</span><br></pre></td></tr></table></figure>
 
+<p>这里第一个运算是没有返回值指明的，只有第二个指明的返回值变量，这样拆分后经过验证是与未拆分前完成的操作是一致的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说，上述的仅一行的那种代码是python书写追求优雅性的体现，（确实是优雅啊，优雅到我都看不懂23333），看来自己在优雅python大师养成之路上还有很远一段征程要走啊！</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/07/tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/29/python语法：_作为函数中参数调用/" class="archive-article-date">
-  	<time datetime="2019-09-29T12:38:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-29</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/29/python语法：_作为函数中参数调用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python中*号的作用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/29/python语法：_作为函数中参数调用/">python中*号的作用</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/27/解决jupyter打开之后不能直接跳转到浏览器的问题/" class="archive-article-date">
-  	<time datetime="2019-09-27T05:19:58.704Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/27/解决jupyter打开之后不能直接跳转到浏览器的问题/">解决打开jupyter后不能直接跳转到浏览器的问题</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/27/《pytorch深度学习原理与pytorch实战》第三章 单车预测器1.0勘误（可能版本有别）/" class="archive-article-date">
-  	<time datetime="2019-09-27T03:53:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/27/《pytorch深度学习原理与pytorch实战》第三章 单车预测器1.0勘误（可能版本有别）/">《pytorch深度学习原理与pytorch实战》第三章 单车预测器1.0勘误（可能版本有别）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/24/博客初识/" class="archive-article-date">
-  	<time datetime="2019-09-24T14:35:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/24/博客初识/">博客初识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/14/hello-world/" class="archive-article-date">
-  	<time datetime="2019-09-14T10:44:12.750Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/14/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -350,8 +335,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

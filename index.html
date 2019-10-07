@@ -152,6 +152,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/07/tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释/">tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/07/tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释/" class="archive-article-date">
+  	<time datetime="2019-10-07T13:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题的发现"><a href="#问题的发现" class="headerlink" title="问题的发现"></a>问题的发现</h2><p>今天在尝试实现《<a href="http://product.dangdang.com/25231551.html" target="_blank" rel="noopener">深度学习之TensorFlow入门、原理与进阶实战</a>》的时候书写了一段代码，其中有一行代码我甚是纠结了半天，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_,c = sess.run([optimizer,cost],feed_dict=&#123;x:batch_xs,y:batch_yx&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>就是这样一行代码的头部_,c的操作看得我迷了半天，为什么会有这样的表达，在我网上冲浪并且询问大佬过后终于明白了这的代码这样书写的原因。</p>
+<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>在python运行的过程中，往往会出现需要运算但是不需要其返回值的情况出现，即：我需要你运算一下，但是我不需要再操作你的结果（是不是很jian哈哈哈哈）。而这里的情况就是如此，代码中一个session中让两个参数都运算了，但是在后续的程序中，我们只需要操作cost这个变量而不需要操作optimizer这个变量。注意，这时候下划线就起作用了，在查阅了python的官方关于下划线的文档之后，发现在多个参数返回运算时，下划线可以充当一个类似占位符一样的作用，仅仅表示这有一个参数而不去指明它的名称（因为后续操作不到这个参数，所以不需要指明）。</p>
+<p>这样理解以后，我将上述一行代码拆分成了两行代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sess.run(optimizer,feed_dict=&#123;x:batch_xs,y:batch_ys&#125;)</span><br><span class="line">c = sess.run(cost,feed_dict=&#123;x:batch_xs,y:batch_ys&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这里第一个运算是没有返回值指明的，只有第二个指明的返回值变量，这样拆分后经过验证是与未拆分前完成的操作是一致的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说，上述的仅一行的那种代码是python书写追求优雅性的体现，（确实是优雅啊，优雅到我都看不懂23333），看来自己在优雅python大师养成之路上还有很远一段征程要走啊！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/07/tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-python语法：_作为函数中参数调用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
