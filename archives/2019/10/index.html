@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>笑源的博客</title>
+  <title>Archives: 2019/10 | 笑源的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="个人技术博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="笑源的博客">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/archives/2019/10/index.html">
 <meta property="og:site_name" content="笑源的博客">
 <meta property="og:description" content="个人技术博客">
 <meta property="og:locale" content="zh_CN">
@@ -155,666 +155,74 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-解决jupyter打开之后不能直接跳转到浏览器的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/%E8%A7%A3%E5%86%B3jupyter%E6%89%93%E5%BC%80%E4%B9%8B%E5%90%8E%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E8%B7%B3%E8%BD%AC%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E9%97%AE%E9%A2%98/">解决打开jupyter后不能直接跳转到浏览器的问题</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/%E8%A7%A3%E5%86%B3jupyter%E6%89%93%E5%BC%80%E4%B9%8B%E5%90%8E%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E8%B7%B3%E8%BD%AC%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-10-19T08:56:48.381Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="jupyter介绍"><a href="#jupyter介绍" class="headerlink" title="jupyter介绍"></a>jupyter介绍</h2><p>jupyter的全称为Jupyter Notebook，之前一度被称为（IPython notebook），是一种交互式的程序运行笔记本，它现在支持着40多种的编程语言，可以说是非常高效的语言测试环境。<br>jupyter notebook的本质其实是一个web应用程序，便于创建和共享程序文档，可以将实时代码，框图，数学方程等等集成到一个环境当中。经常被用于数据处理，系统建模和机器学习等。</p>
-<h2 id="jupyter的安装"><a href="#jupyter的安装" class="headerlink" title="jupyter的安装"></a>jupyter的安装</h2><p>jupyter的安装是可以随anconda的下载一并下载的，在这里不做过多的介绍，读者有兴趣可以参考其他博主的anconda安装过程和配置过程</p>
-<h2 id="笔者使用jupyter时遇到的问题"><a href="#笔者使用jupyter时遇到的问题" class="headerlink" title="笔者使用jupyter时遇到的问题"></a>笔者使用jupyter时遇到的问题</h2><p>在之前笔者每每打开jupyter 的时候总是会遇到以下的窗口提示，导致我每次都不得不手动复制窗口提示中给出的URL粘贴到浏览器中运行，这样做未免太过于麻烦</p>
-<p><img src="https://img-blog.csdnimg.cn/20190927130150261.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjY2OTg3,size_16,color_FFFFFF,t_70" alt="窗口提示给了三种URL，每次必须手动复制粘贴前往jupyter">在查阅了相关资料之后，发现jupyter是可可以通过设置直接跳转到浏览器当中的，具体操作步骤为：<br>用管理员方式打开anconda prompt，之后再其中输入：<br>jupyter notebook –generate-config<img src="https://img-blog.csdnimg.cn/20190927130801241.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjY2OTg3,size_16,color_FFFFFF,t_70" alt="因为我之前用过这个命令，所以这里提示是否覆盖原来的路径"><br>这之后打开窗口中提示的路径，打开新生成的这个文件，在文件的最末尾添加上：</p>
-<p>#c.NotebookApp.browser = ‘’<br>import webbrowser<br>webbrowser.register(‘chrome’,None,webbrowser.GenericBrowser(u’C:\Users\联想\AppData\Local\Google\Chrome\Application\chrome.exe’))<br>c.NotebookApp.browser = ‘chrome’<br>当然其中这个Chrome浏览器的路径要分别依据个人电脑里的路径，查看本路径的方法为打开Chrome快捷方式的属性查看。特别需要注意的是，一定要用双斜杠代替单斜杠，不然会发生字符编码错误。<br><img src="https://img-blog.csdnimg.cn/20190927131727839.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjY2OTg3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如此编辑之后，每当打开jupyter之后都能直接跳转到浏览器的jupyter的运行界面。<br><img src="https://img-blog.csdnimg.cn/20190927131648695.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjY2OTg3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
+    
       
       
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/%E8%A7%A3%E5%86%B3jupyter%E6%89%93%E5%BC%80%E4%B9%8B%E5%90%8E%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E8%B7%B3%E8%BD%AC%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-正则表达式的书写" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+        <div class="archives">
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E4%B9%A6%E5%86%99/">正则表达式的书写</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E4%B9%A6%E5%86%99/" class="archive-article-date">
-  	<time datetime="2020-10-19T08:56:48.352Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>由于最近在学习python爬虫，遇到了绕脑的正则表达式。一般正常的正则表达式非常精炼而且高效，但是当我们过了一段时间后，别人甚至自己再次阅读自己写的正则表达式时，甚至仍会犯迷糊，于是藉此机会，我将一些常用的正则表达式书写规范列写在下方每个表达式我都会配以例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment">#随机生成字符串列表</span></span><br><span class="line"><span class="built_in">list</span> = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    <span class="built_in">list</span>.append(<span class="string">&#x27;&#x27;</span>.join(random.sample(string.ascii_letters + string.digits, <span class="number">8</span>))) </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">str</span> <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">    print(<span class="built_in">str</span>)</span><br><span class="line">    </span><br><span class="line">print(<span class="string">&quot;-------------------------&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">str</span> <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">    <span class="keyword">if</span> re.match(<span class="string">&#x27;正则表达式写在这&#x27;</span>,<span class="built_in">str</span>) <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        print(<span class="built_in">str</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-<p>这段代码生成随机5个字符串并放入列表的程序，随后与正则表达式进行比较，如果有符合该正则表达式的列表项，则再一次输出它。</p>
-<p>1、+：匹配括号里的字符==至少==出现一次</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.*(c+).*</span><br></pre></td></tr></table></figure>
-<p>有效果的输出为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">jAFX5Wc6</span><br><span class="line">TpY4n2IG</span><br><span class="line">mR3sBbxH</span><br><span class="line"><span class="number">5</span>nfrQj4t</span><br><span class="line">HN8vLIDK</span><br><span class="line">-------------------------</span><br><span class="line">jAFX5Wc6</span><br></pre></td></tr></table></figure>
-<p>2、[]：匹配括号中的任何一个字符</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[a-z].*</span><br></pre></td></tr></table></figure>
-<p>有效果的输出为：<br>这里的目的就是将含有数字的代码略去了</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nvNK3GrL</span><br><span class="line">hbxedPRW</span><br><span class="line"><span class="number">7</span>ibS6IJL</span><br><span class="line"><span class="number">2</span>tIbUsvr</span><br><span class="line">LfJko3cP</span><br><span class="line">-------------------------</span><br><span class="line">nvNK3GrL</span><br><span class="line">hbxedPRW</span><br></pre></td></tr></table></figure>
-<p>3、|：或表达，匹配|符号两端的任意一个字符</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;.*[a|b].*&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>有效果的输出为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">qURbwjvp</span><br><span class="line">MGiudL62</span><br><span class="line"><span class="number">8</span>F64Lbfm</span><br><span class="line">mYXRNe8c</span><br><span class="line">sKHU7i0y</span><br><span class="line">-------------------------</span><br><span class="line">qURbwjvp</span><br></pre></td></tr></table></figure>
-<p>4、.和*：我之前已经用过这个符号几次了<br>.代表通配符，表示任何单个字符<br>而==星号==（因为MARKDOWN写星号有特殊意义所以就用中文代替了-_-）表示的是重复多次（多次是指两次或两次以上）或没有。这样看来，星号带表的意思和+号差不多，仅仅就是在==单单一次==和==没有==这两种情况的差别。</p>
-<p>还有许多其他常用的正则表达式，笔者这里就不一一写出来了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E4%B9%A6%E5%86%99/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/19/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/10/19/hello-world/" class="archive-article-date">
-  	<time datetime="2020-10-19T08:35:12.171Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/19/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何让spyder编写的代码自动格式化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/24/%E5%A6%82%E4%BD%95%E8%AE%A9spyder%E7%BC%96%E5%86%99%E7%9A%84%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E6%A0%BC%E5%BC%8F%E5%8C%96/">如何让spyder编写的代码自动格式化</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/24/%E5%A6%82%E4%BD%95%E8%AE%A9spyder%E7%BC%96%E5%86%99%E7%9A%84%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E6%A0%BC%E5%BC%8F%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2019-11-24T10:15:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="问题的发现"><a href="#问题的发现" class="headerlink" title="问题的发现"></a>问题的发现</h2><p>python的许多编辑器都可以写出漂亮精简的代码，但是一般的主流编辑器都很好有代码自动格式化的功能。visual studio在每一行写完代码敲击分号(;)的时候都能够对这一整行的代码进行重新排版，使其能够具有规范化代码形式。<br>这是没有打分号的形式：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a,b  ,c= <span class="number">12</span></span><br></pre></td></tr></table></figure>
-<p>这是打过分号的形式：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a, b, c = <span class="number">12</span>;</span><br></pre></td></tr></table></figure>
-<p>visual studio编辑器的强大让python选手非常嫉妒，但python编辑器甚至是大多数的文本编辑器都是可以通过加载插件的形式让我们编写好的代码（不符合代码排版规范）能够自动重新排版，使其符合PEP8代码规范。</p>
-<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>针对大多数编辑器不能自动格式化排版的问题，autopep8插件能够让python编辑器如虎添翼。autopep8自动排版插件需要两个步骤，第一个步骤为安装autopep8,在anconda的指定环境下，用prompt以管理员方式打开并输入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade autopep8</span><br></pre></td></tr></table></figure>
-<p>环境会自动搜索autopep8进行安装。除此之外，还需要安装下载插件文件，通过GitHub上的库即可下载解压：<a target="_blank" rel="noopener" href="https://github.com/spyder-ide/spyder-autopep8">连接地址</a><br>之后将解压出来文件中的文件夹spyder_autopep8放在指定的spyder文件目录，像我的文件目录就在</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\pyEnvironment\Anaconda3\envs\python3.6\Scripts</span><br></pre></td></tr></table></figure>
-<p>因为我在原来的anconda环境中重新部署了一个python3.6的环境，所以路径名称可能会和读者的不太一致，大家找到自己的spyder启动项路径即可。<br>随后再次打开spyder编辑器，就可以在上方source工具栏里看到<strong>run autopep8</strong>选项<br><img src="https://img-blog.csdnimg.cn/20191124180858496.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjY2OTg3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>没有进行代码格式化的代码为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> bs4   <span class="keyword">import</span>     BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pages=     <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLinks</span>   (<span class="params">pageUrl</span>):</span></span><br><span class="line">    <span class="keyword">global</span>     pages</span><br><span class="line">    html = urlopen(<span class="string">&quot;http://en.wikipedia.org&#123;&#125;&quot;</span>.<span class="built_in">format</span>(pageUrl))</span><br><span class="line">    bs =BeautifulSoup(html, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        print(bs.h1.     get_text())</span><br><span class="line">        <span class="built_in">print</span>   (bs.find(<span class="built_in">id</span>=<span class="string">&quot;mw-content-text&quot;</span>). </span><br><span class="line">              find_all(<span class="string">&#x27;p&#x27;</span>)[<span class="number">0</span>])</span><br><span class="line">        print(bs.find(<span class="built_in">id</span>=<span class="string">&#x27;ca-edit&#x27;</span>).</span><br><span class="line">              find(<span class="string">&#x27;span&#x27;</span>).find(<span class="string">&#x27;a&#x27;</span>).attrs[<span class="string">&#x27;href&#x27;</span>])</span><br><span class="line">    <span class="keyword">except</span> AttributeError:</span><br><span class="line">        print(<span class="string">&quot;页面缺少一些属性！不过不用担心！&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> link <span class="keyword">in</span> bs.   find_all(<span class="string">&#x27;a&#x27;</span>, href=re.<span class="built_in">compile</span>(<span class="string">&#x27;^(/wiki/)&#x27;</span>)):</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;href&#x27;</span> <span class="keyword">in</span> link.attrs:</span><br><span class="line">            <span class="keyword">if</span> link.attrs[<span class="string">&#x27;href&#x27;</span>] <span class="keyword">not</span> <span class="keyword">in</span> pages:</span><br><span class="line">                <span class="comment"># 我们遇到了一个新的页面</span></span><br><span class="line">                newPage = link.attrs[<span class="string">&#x27;href&#x27;</span>]</span><br><span class="line">                print(<span class="string">&#x27;-&#x27;</span>*<span class="number">20</span>)</span><br><span class="line">                <span class="built_in">print</span>      (newPage)</span><br><span class="line">                pages.add    (newPage)</span><br><span class="line">                getLinks     (newPage)</span><br><span class="line">getLinks(<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>经过格式化之后的代码为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pages = <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLinks</span>(<span class="params">pageUrl</span>):</span></span><br><span class="line">    <span class="keyword">global</span> pages</span><br><span class="line">    html = urlopen(<span class="string">&quot;http://en.wikipedia.org&#123;&#125;&quot;</span>.<span class="built_in">format</span>(pageUrl))</span><br><span class="line">    bs = BeautifulSoup(html, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        print(bs.h1.get_text())</span><br><span class="line">        print(bs.find(<span class="built_in">id</span>=<span class="string">&quot;mw-content-text&quot;</span>).</span><br><span class="line">              find_all(<span class="string">&#x27;p&#x27;</span>)[<span class="number">0</span>])</span><br><span class="line">        print(bs.find(<span class="built_in">id</span>=<span class="string">&#x27;ca-edit&#x27;</span>).</span><br><span class="line">              find(<span class="string">&#x27;span&#x27;</span>).find(<span class="string">&#x27;a&#x27;</span>).attrs[<span class="string">&#x27;href&#x27;</span>])</span><br><span class="line">    <span class="keyword">except</span> AttributeError:</span><br><span class="line">        print(<span class="string">&quot;页面缺少一些属性！不过不用担心！&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> link <span class="keyword">in</span> bs.find_all(<span class="string">&#x27;a&#x27;</span>, href=re.<span class="built_in">compile</span>(<span class="string">&#x27;^(/wiki/)&#x27;</span>)):</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;href&#x27;</span> <span class="keyword">in</span> link.attrs:</span><br><span class="line">            <span class="keyword">if</span> link.attrs[<span class="string">&#x27;href&#x27;</span>] <span class="keyword">not</span> <span class="keyword">in</span> pages:</span><br><span class="line">                <span class="comment"># 我们遇到了一个新的页面</span></span><br><span class="line">                newPage = link.attrs[<span class="string">&#x27;href&#x27;</span>]</span><br><span class="line">                print(<span class="string">&#x27;-&#x27;</span>*<span class="number">20</span>)</span><br><span class="line">                print(newPage)</span><br><span class="line">                pages.add(newPage)</span><br><span class="line">                getLinks(newPage)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">getLinks(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>这样以后清楚了许多，当然也可以直接使用Ctrl+F8快捷键直接进行autopep8，同样能够达到令人满意的效果。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/24/%E5%A6%82%E4%BD%95%E8%AE%A9spyder%E7%BC%96%E5%86%99%E7%9A%84%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E6%A0%BC%E5%BC%8F%E5%8C%96/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-有关于python数字图像处理出现矩阵相减没有负数（值都在0-255）的情况分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/14/%E6%9C%89%E5%85%B3%E4%BA%8Epython%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BA%E7%8E%B0%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%87%8F%E6%B2%A1%E6%9C%89%E8%B4%9F%E6%95%B0%EF%BC%88%E5%80%BC%E9%83%BD%E5%9C%A80-255%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E5%88%86%E6%9E%90/">有关于python数字图像处理出现矩阵相减没有负数（值都在0-255）的情况分析</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/14/%E6%9C%89%E5%85%B3%E4%BA%8Epython%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BA%E7%8E%B0%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%87%8F%E6%B2%A1%E6%9C%89%E8%B4%9F%E6%95%B0%EF%BC%88%E5%80%BC%E9%83%BD%E5%9C%A80-255%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E5%88%86%E6%9E%90/" class="archive-article-date">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/10/14/%E6%9C%89%E5%85%B3%E4%BA%8Epython%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BA%E7%8E%B0%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%87%8F%E6%B2%A1%E6%9C%89%E8%B4%9F%E6%95%B0%EF%BC%88%E5%80%BC%E9%83%BD%E5%9C%A80-255%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E5%88%86%E6%9E%90/" class="archive-article-date">
   	<time datetime="2019-10-14T06:14:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-14</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="有关于python数字图像处理出现矩阵相减没有负数（值都在0-255）的情况分析"><a href="#有关于python数字图像处理出现矩阵相减没有负数（值都在0-255）的情况分析" class="headerlink" title="有关于python数字图像处理出现矩阵相减没有负数（值都在0-255）的情况分析"></a>有关于python数字图像处理出现矩阵相减没有负数（值都在0-255）的情况分析</h1><h2 id="问题的发现："><a href="#问题的发现：" class="headerlink" title="问题的发现："></a>问题的发现：</h2><p>这些天在做我们本校课程机器学习大作业的过程中遇到了一些瓶颈：在我使用有关数字图像矩阵运算的过程中两个参数矩阵相减（譬如 R通道的值-G通道的值）的时候，测试结果的输出一直是正数，且其值都在（0-255）中，这给我带来了不少麻烦。<br>测试代码如下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(imgs_train[<span class="number">1</span>][:,:,<span class="number">1</span>])</span><br><span class="line">print(<span class="string">&quot;====================================&quot;</span>)</span><br><span class="line">print(imgs_train[<span class="number">1</span>][:,:,<span class="number">2</span>])</span><br><span class="line">print(<span class="string">&quot;====================================&quot;</span>)</span><br><span class="line">print(imgs_train[<span class="number">1</span>][:,:,<span class="number">1</span>]-imgs_train[<span class="number">1</span>][:,:,<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
-<p>输出结果为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="number">141</span> <span class="number">143</span> <span class="number">144</span> ...  <span class="number">90</span>  <span class="number">90</span>  <span class="number">68</span>]</span><br><span class="line"> [<span class="number">139</span> <span class="number">141</span> <span class="number">141</span> ...  <span class="number">88</span>  <span class="number">90</span>  <span class="number">68</span>]</span><br><span class="line"> [<span class="number">140</span> <span class="number">141</span> <span class="number">140</span> ...  <span class="number">87</span>  <span class="number">90</span>  <span class="number">68</span>]</span><br><span class="line"> ...</span><br><span class="line"> [ <span class="number">52</span>  <span class="number">52</span>  <span class="number">52</span> ...  <span class="number">85</span>  <span class="number">83</span>  <span class="number">81</span>]</span><br><span class="line"> [ <span class="number">52</span>  <span class="number">52</span>  <span class="number">52</span> ...  <span class="number">85</span>  <span class="number">83</span>  <span class="number">81</span>]</span><br><span class="line"> [ <span class="number">52</span>  <span class="number">52</span>  <span class="number">52</span> ...  <span class="number">85</span>  <span class="number">83</span>  <span class="number">81</span>]]</span><br><span class="line">====================================</span><br><span class="line">[[<span class="number">171</span> <span class="number">173</span> <span class="number">172</span> ... <span class="number">106</span> <span class="number">107</span>  <span class="number">84</span>]</span><br><span class="line"> [<span class="number">169</span> <span class="number">171</span> <span class="number">169</span> ... <span class="number">106</span> <span class="number">107</span>  <span class="number">86</span>]</span><br><span class="line"> [<span class="number">169</span> <span class="number">170</span> <span class="number">169</span> ... <span class="number">107</span> <span class="number">109</span>  <span class="number">88</span>]</span><br><span class="line"> ...</span><br><span class="line"> [ <span class="number">40</span>  <span class="number">40</span>  <span class="number">43</span> ...  <span class="number">68</span>  <span class="number">66</span>  <span class="number">64</span>]</span><br><span class="line"> [ <span class="number">40</span>  <span class="number">40</span>  <span class="number">43</span> ...  <span class="number">68</span>  <span class="number">66</span>  <span class="number">64</span>]</span><br><span class="line"> [ <span class="number">40</span>  <span class="number">40</span>  <span class="number">43</span> ...  <span class="number">68</span>  <span class="number">66</span>  <span class="number">64</span>]]</span><br><span class="line">====================================</span><br><span class="line">[[<span class="number">226</span> <span class="number">226</span> <span class="number">228</span> ... <span class="number">240</span> <span class="number">239</span> <span class="number">240</span>]</span><br><span class="line"> [<span class="number">226</span> <span class="number">226</span> <span class="number">228</span> ... <span class="number">238</span> <span class="number">239</span> <span class="number">238</span>]</span><br><span class="line"> [<span class="number">227</span> <span class="number">227</span> <span class="number">227</span> ... <span class="number">236</span> <span class="number">237</span> <span class="number">236</span>]</span><br><span class="line"> ...</span><br><span class="line"> [ <span class="number">12</span>  <span class="number">12</span>   <span class="number">9</span> ...  <span class="number">17</span>  <span class="number">17</span>  <span class="number">17</span>]</span><br><span class="line"> [ <span class="number">12</span>  <span class="number">12</span>   <span class="number">9</span> ...  <span class="number">17</span>  <span class="number">17</span>  <span class="number">17</span>]</span><br><span class="line"> [ <span class="number">12</span>  <span class="number">12</span>   <span class="number">9</span> ...  <span class="number">17</span>  <span class="number">17</span>  <span class="number">17</span>]]</span><br></pre></td></tr></table></figure>
-<p>可以看得出来，虽然两个矩阵相减，但是理应为负值的元素却像是取模了一般又变为了正数（255+计算结果），导致这样情况的原因其实是因为矩阵的元素类型有关。默认来说这样的矩阵类型是uint8即无符号8bit整型，这样进行相减当然得不出正确结果。</p>
-<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>在查阅相关资料之后，发现可以通过设置其元素格式进行运算，从而规避了无负数结果的发生。<br>测试代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(imgs_train[<span class="number">1</span>][:,:,<span class="number">1</span>])</span><br><span class="line">print(<span class="string">&quot;====================================&quot;</span>)</span><br><span class="line">print(imgs_train[<span class="number">1</span>][:,:,<span class="number">2</span>])</span><br><span class="line">print(<span class="string">&quot;====================================&quot;</span>)</span><br><span class="line">print(imgs_train[<span class="number">1</span>][:,:,<span class="number">1</span>].astype(np.float32)-imgs_train[<span class="number">1</span>][:,:,<span class="number">2</span>].astype(np.float32))</span><br></pre></td></tr></table></figure>
-<p>结果显示为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="number">141</span> <span class="number">143</span> <span class="number">144</span> ...  <span class="number">90</span>  <span class="number">90</span>  <span class="number">68</span>]</span><br><span class="line"> [<span class="number">139</span> <span class="number">141</span> <span class="number">141</span> ...  <span class="number">88</span>  <span class="number">90</span>  <span class="number">68</span>]</span><br><span class="line"> [<span class="number">140</span> <span class="number">141</span> <span class="number">140</span> ...  <span class="number">87</span>  <span class="number">90</span>  <span class="number">68</span>]</span><br><span class="line"> ...</span><br><span class="line"> [ <span class="number">52</span>  <span class="number">52</span>  <span class="number">52</span> ...  <span class="number">85</span>  <span class="number">83</span>  <span class="number">81</span>]</span><br><span class="line"> [ <span class="number">52</span>  <span class="number">52</span>  <span class="number">52</span> ...  <span class="number">85</span>  <span class="number">83</span>  <span class="number">81</span>]</span><br><span class="line"> [ <span class="number">52</span>  <span class="number">52</span>  <span class="number">52</span> ...  <span class="number">85</span>  <span class="number">83</span>  <span class="number">81</span>]]</span><br><span class="line">====================================</span><br><span class="line">[[<span class="number">171</span> <span class="number">173</span> <span class="number">172</span> ... <span class="number">106</span> <span class="number">107</span>  <span class="number">84</span>]</span><br><span class="line"> [<span class="number">169</span> <span class="number">171</span> <span class="number">169</span> ... <span class="number">106</span> <span class="number">107</span>  <span class="number">86</span>]</span><br><span class="line"> [<span class="number">169</span> <span class="number">170</span> <span class="number">169</span> ... <span class="number">107</span> <span class="number">109</span>  <span class="number">88</span>]</span><br><span class="line"> ...</span><br><span class="line"> [ <span class="number">40</span>  <span class="number">40</span>  <span class="number">43</span> ...  <span class="number">68</span>  <span class="number">66</span>  <span class="number">64</span>]</span><br><span class="line"> [ <span class="number">40</span>  <span class="number">40</span>  <span class="number">43</span> ...  <span class="number">68</span>  <span class="number">66</span>  <span class="number">64</span>]</span><br><span class="line"> [ <span class="number">40</span>  <span class="number">40</span>  <span class="number">43</span> ...  <span class="number">68</span>  <span class="number">66</span>  <span class="number">64</span>]]</span><br><span class="line">====================================</span><br><span class="line">[[<span class="number">-30.</span> <span class="number">-30.</span> <span class="number">-28.</span> ... <span class="number">-16.</span> <span class="number">-17.</span> <span class="number">-16.</span>]</span><br><span class="line"> [<span class="number">-30.</span> <span class="number">-30.</span> <span class="number">-28.</span> ... <span class="number">-18.</span> <span class="number">-17.</span> <span class="number">-18.</span>]</span><br><span class="line"> [<span class="number">-29.</span> <span class="number">-29.</span> <span class="number">-29.</span> ... <span class="number">-20.</span> <span class="number">-19.</span> <span class="number">-20.</span>]</span><br><span class="line"> ...</span><br><span class="line"> [ <span class="number">12.</span>  <span class="number">12.</span>   <span class="number">9.</span> ...  <span class="number">17.</span>  <span class="number">17.</span>  <span class="number">17.</span>]</span><br><span class="line"> [ <span class="number">12.</span>  <span class="number">12.</span>   <span class="number">9.</span> ...  <span class="number">17.</span>  <span class="number">17.</span>  <span class="number">17.</span>]</span><br><span class="line"> [ <span class="number">12.</span>  <span class="number">12.</span>   <span class="number">9.</span> ...  <span class="number">17.</span>  <span class="number">17.</span>  <span class="number">17.</span>]]</span><br></pre></td></tr></table></figure>
-
-<p>综上所述，在遇到矩阵不明数值类型的时候可以指定其类型，之后矩阵元素就会以这样的数值类型进行计算。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/14/%E6%9C%89%E5%85%B3%E4%BA%8Epython%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BA%E7%8E%B0%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%87%8F%E6%B2%A1%E6%9C%89%E8%B4%9F%E6%95%B0%EF%BC%88%E5%80%BC%E9%83%BD%E5%9C%A80-255%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E5%88%86%E6%9E%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/07/tensorflow%E7%9A%84%E5%A5%87%E5%A6%99%E4%B8%8B%E5%88%92%E7%BA%BF%EF%BC%8C%E5%BD%A2%E5%A6%82%EF%BC%88_%EF%BC%8C%E5%8F%98%E9%87%8F%EF%BC%89%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E6%93%8D%E4%BD%9C%E7%9A%84%E8%A7%A3%E9%87%8A/">tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释</a>
+      <a class="archive-article-title" href="/2019/10/14/%E6%9C%89%E5%85%B3%E4%BA%8Epython%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%87%BA%E7%8E%B0%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%87%8F%E6%B2%A1%E6%9C%89%E8%B4%9F%E6%95%B0%EF%BC%88%E5%80%BC%E9%83%BD%E5%9C%A80-255%EF%BC%89%E7%9A%84%E6%83%85%E5%86%B5%E5%88%86%E6%9E%90/">有关于python数字图像处理出现矩阵相减没有负数（值都在0-255）的情况分析</a>
     </h1>
   
 
-        
-        <a href="/2019/10/07/tensorflow%E7%9A%84%E5%A5%87%E5%A6%99%E4%B8%8B%E5%88%92%E7%BA%BF%EF%BC%8C%E5%BD%A2%E5%A6%82%EF%BC%88_%EF%BC%8C%E5%8F%98%E9%87%8F%EF%BC%89%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E6%93%8D%E4%BD%9C%E7%9A%84%E8%A7%A3%E9%87%8A/" class="archive-article-date">
+        <div class="article-info info-on-right">
+          
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/10/07/tensorflow%E7%9A%84%E5%A5%87%E5%A6%99%E4%B8%8B%E5%88%92%E7%BA%BF%EF%BC%8C%E5%BD%A2%E5%A6%82%EF%BC%88_%EF%BC%8C%E5%8F%98%E9%87%8F%EF%BC%89%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E6%93%8D%E4%BD%9C%E7%9A%84%E8%A7%A3%E9%87%8A/" class="archive-article-date">
   	<time datetime="2019-10-07T13:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="问题的发现"><a href="#问题的发现" class="headerlink" title="问题的发现"></a>问题的发现</h2><p>今天在尝试实现《<a target="_blank" rel="noopener" href="http://product.dangdang.com/25231551.html">深度学习之TensorFlow入门、原理与进阶实战</a>》的时候书写了一段代码，其中有一行代码我甚是纠结了半天，代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_,c = sess.run([optimizer,cost],feed_dict=&#123;x:batch_xs,y:batch_yx&#125;)</span><br></pre></td></tr></table></figure>
-<p>就是这样一行代码的头部_,c的操作看得我迷了半天，为什么会有这样的表达，在我网上冲浪并且询问大佬过后终于明白了这的代码这样书写的原因。</p>
-<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>在python运行的过程中，往往会出现需要运算但是不需要其返回值的情况出现，即：我需要你运算一下，但是我不需要再操作你的结果（是不是很jian哈哈哈哈）。而这里的情况就是如此，代码中一个session中让两个参数都运算了，但是在后续的程序中，我们只需要操作cost这个变量而不需要操作optimizer这个变量。注意，这时候下划线就起作用了，在查阅了python的官方关于下划线的文档之后，发现在多个参数返回运算时，下划线可以充当一个类似占位符一样的作用，仅仅表示这有一个参数而不去指明它的名称（因为后续操作不到这个参数，所以不需要指明）。</p>
-<p>这样理解以后，我将上述一行代码拆分成了两行代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sess.run(optimizer,feed_dict=&#123;x:batch_xs,y:batch_ys&#125;)</span><br><span class="line">c = sess.run(cost,feed_dict=&#123;x:batch_xs,y:batch_ys&#125;)</span><br></pre></td></tr></table></figure>
-<p>这里第一个运算是没有返回值指明的，只有第二个指明的返回值变量，这样拆分后经过验证是与未拆分前完成的操作是一致的。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说，上述的仅一行的那种代码是python书写追求优雅性的体现，（确实是优雅啊，优雅到我都看不懂23333），看来自己在优雅python大师养成之路上还有很远一段征程要走啊！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/07/tensorflow%E7%9A%84%E5%A5%87%E5%A6%99%E4%B8%8B%E5%88%92%E7%BA%BF%EF%BC%8C%E5%BD%A2%E5%A6%82%EF%BC%88_%EF%BC%8C%E5%8F%98%E9%87%8F%EF%BC%89%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E6%93%8D%E4%BD%9C%E7%9A%84%E8%A7%A3%E9%87%8A/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-python语法：_作为函数中参数调用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/29/python%E8%AF%AD%E6%B3%95%EF%BC%9A_%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E4%B8%AD%E5%8F%82%E6%95%B0%E8%B0%83%E7%94%A8/">python中*号的作用</a>
+      <a class="archive-article-title" href="/2019/10/07/tensorflow%E7%9A%84%E5%A5%87%E5%A6%99%E4%B8%8B%E5%88%92%E7%BA%BF%EF%BC%8C%E5%BD%A2%E5%A6%82%EF%BC%88_%EF%BC%8C%E5%8F%98%E9%87%8F%EF%BC%89%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E6%93%8D%E4%BD%9C%E7%9A%84%E8%A7%A3%E9%87%8A/">tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释</a>
     </h1>
   
 
-        
-        <a href="/2019/09/29/python%E8%AF%AD%E6%B3%95%EF%BC%9A_%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E4%B8%AD%E5%8F%82%E6%95%B0%E8%B0%83%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2019-09-29T12:38:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>做这篇博客的起因是在看<a target="_blank" rel="noopener" href="http://product.dangdang.com/25231551.html">《深度学习之tensorflow入门原理与进阶实战》</a>的时候，在第一章遇到了np.random.randn(*train_X.shape)的骚操作，一时没有翻过楞来，于是想收集并总结一波星号在python语法中的运用。</p>
-<h2 id="（-星号）在python中的几个作用："><a href="#（-星号）在python中的几个作用：" class="headerlink" title="（*星号）在python中的几个作用："></a>（*星号）在python中的几个作用：</h2><h4 id="1、作为乘法运算符使用："><a href="#1、作为乘法运算符使用：" class="headerlink" title="1、作为乘法运算符使用："></a>1、作为乘法运算符使用：</h4><p>当一个变量与另一个变量用*连接并运算时，是作为乘法运算符来使用的</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c = a * b</span><br></pre></td></tr></table></figure>
+        <div class="article-info info-on-right">
+          
+          
 
-<h4 id="2、作为次幂号使用："><a href="#2、作为次幂号使用：" class="headerlink" title="2、作为次幂号使用："></a>2、作为次幂号使用：</h4><p>当两个*号把两个数字变量相连时，是作为次幂号来使用的</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">2</span></span><br><span class="line">b = <span class="number">3</span></span><br><span class="line">c = a ** b</span><br><span class="line">print(c)</span><br><span class="line"><span class="comment">#输出为</span></span><br><span class="line"><span class="number">8</span>  <span class="comment">#即2^3为8</span></span><br></pre></td></tr></table></figure>
-<h6 id="3、作为参数通配符使用-在定义函数的过程中-："><a href="#3、作为参数通配符使用-在定义函数的过程中-：" class="headerlink" title="3、作为参数通配符使用(在定义函数的过程中)："></a>3、作为参数通配符使用(在定义函数的过程中)：</h6><p>这在你想要的使用参数但你又不知道参数的个数有多少个时使用，大多用在元组或字典当</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_tuple</span>(<span class="params">*args</span>):</span></span><br><span class="line">	<span class="keyword">for</span> arg <span class="keyword">in</span> args:</span><br><span class="line">		print(arg)</span><br><span class="line">print_tuple(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-<p>这样输出的结果为一个刚刚自己填入的数据列</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br></pre></td></tr></table></figure>
-<p>倘若要输出字典，则可以用**，具体操作如下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_dict</span>(<span class="params">**args</span>):</span></span><br><span class="line">	print(args)</span><br><span class="line">print_dict(Wu=<span class="string">&#x27;Sunquan&#x27;</span>,Wei=<span class="string">&#x27;Caocao&#x27;</span>,Shu=<span class="string">&#x27;LiuBei&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>这样输出为一个刚刚填入的字典</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;Wu&#x27;</span>: <span class="string">&#x27;Sunquan&#x27;</span>, <span class="string">&#x27;Wei&#x27;</span>: <span class="string">&#x27;Caocao&#x27;</span>, <span class="string">&#x27;Shu&#x27;</span>: <span class="string">&#x27;LiuBei&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="4、作为解构操作符使用："><a href="#4、作为解构操作符使用：" class="headerlink" title="4、作为解构操作符使用："></a>4、作为解构操作符使用：</h6><p>这种应用就是我在文章开头指出的应用，np.random.randn(*train_X.shape)<br>书上还是很贴心地加上了一句解释，上述语句可以等价于np.random.randn(100),这里的100是trian_X列表的长度。下面来仔细分析一下这个语法：<br>.shape是np对象的一个属性，它显示的是该np对象的维度，返回的是一个元组。打个比方，倘若我的np对象是[[1,2,3],[4,5,6]]，则其shape属性的值就为(2,3)。<br>再来看看   * 这个操作，在python中测试</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">print(*a)</span><br></pre></td></tr></table></figure>
-<p>其输出为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
-<p>可以看出，<em>a这个操作将a本身是元组的这个属性解构了（拆开了）<br>而在本书中此处，trian_X的维度为(100,)，它是一个数组，没有第二个维度，所以</em>train_X.shape表示的就是 解构（100，），其值即为100</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/29/python%E8%AF%AD%E6%B3%95%EF%BC%9A_%E4%BD%9C%E4%B8%BA%E5%87%BD%E6%95%B0%E4%B8%AD%E5%8F%82%E6%95%B0%E8%B0%83%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-《pytorch深度学习原理与pytorch实战》第三章 单车预测器1.0勘误（可能版本有别）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/27/%E3%80%8Apytorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8E%9F%E7%90%86%E4%B8%8Epytorch%E5%AE%9E%E6%88%98%E3%80%8B%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E5%8D%95%E8%BD%A6%E9%A2%84%E6%B5%8B%E5%99%A81.0%E5%8B%98%E8%AF%AF%EF%BC%88%E5%8F%AF%E8%83%BD%E7%89%88%E6%9C%AC%E6%9C%89%E5%88%AB%EF%BC%89/">《pytorch深度学习原理与pytorch实战》第三章 单车预测器1.0勘误（可能版本有别）</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/27/%E3%80%8Apytorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8E%9F%E7%90%86%E4%B8%8Epytorch%E5%AE%9E%E6%88%98%E3%80%8B%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E5%8D%95%E8%BD%A6%E9%A2%84%E6%B5%8B%E5%99%A81.0%E5%8B%98%E8%AF%AF%EF%BC%88%E5%8F%AF%E8%83%BD%E7%89%88%E6%9C%AC%E6%9C%89%E5%88%AB%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-09-27T03:53:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="本书单车预测器1-0的勘误"><a href="#本书单车预测器1-0的勘误" class="headerlink" title="本书单车预测器1.0的勘误"></a>本书单车预测器1.0的勘误</h1><p>可能是<strong>pytorch的版本有别</strong>导致在计算输入层到隐含层之间的公式在按照书上的步骤码代码时会导致无端的扩维</p>
-<p>书上的代码在此处的书写为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hidden = x.expand(sz,<span class="built_in">len</span>(x)).t()*weights.expand(<span class="built_in">len</span>(x),sz)+biases.expand(<span class="built_in">len</span>(x),sz)</span><br></pre></td></tr></table></figure>
-<p>此处的x、weights与biases等都进行了.expand（）函数的扩维,这样进行以后x变为了一个（10,50）的张量，weights变为了一个（50,10）的张量，biases变为了一个（50,10）的张量，并且经过上述的运算最终hidden为一个(10,50)转置*（50，10）+（50,10）是一个（50,10）的张量。需要注意的是在这种情况下，losses的值始终会徘徊在1000左右而不会下降。（具体原因不详，还请大佬可以帮我指点迷津）但我换了另一种方式不表达之后就可以训练得当，具体操作为：</p>
-<p>前端的biases处的定义改为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">biases = Variable(torch.randn(<span class="number">1</span>,<span class="number">10</span>), requires_grad = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<p>之后的hidden表达式改为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 x 转换为(50,1)的维度，以便与维度为(1,10)的weights矩阵相乘</span></span><br><span class="line">x = x.view(<span class="number">50</span>, <span class="number">-1</span>)</span><br><span class="line"><span class="comment"># 将 y 转换为(50,1)的维度</span></span><br><span class="line">y = y.view(<span class="number">50</span>, <span class="number">-1</span>)</span><br><span class="line">--snip--</span><br><span class="line">hidden = x.mul(weights.expand(<span class="number">50</span>,<span class="number">10</span>))  + biases.expand(<span class="number">50</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-<p>其余的代码均和书上一致，这样之后训练出来的结果图为：<br><img src="https://img-blog.csdnimg.cn/20190927114549279.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNjY2OTg3,size_16,color_FFFFFF,t_70" alt="学习率为0.0001，迭代100000次的效果"><br>不知道是不是版本有差别，导致在张量运算的时候出现了差错。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/27/%E3%80%8Apytorch%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8E%9F%E7%90%86%E4%B8%8Epytorch%E5%AE%9E%E6%88%98%E3%80%8B%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E5%8D%95%E8%BD%A6%E9%A2%84%E6%B5%8B%E5%99%A81.0%E5%8B%98%E8%AF%AF%EF%BC%88%E5%8F%AF%E8%83%BD%E7%89%88%E6%9C%AC%E6%9C%89%E5%88%AB%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-博客初识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/24/%E5%8D%9A%E5%AE%A2%E5%88%9D%E8%AF%86/">博客初识</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/24/%E5%8D%9A%E5%AE%A2%E5%88%9D%E8%AF%86/" class="archive-article-date">
-  	<time datetime="2019-09-24T14:35:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="写博客的目的"><a href="#写博客的目的" class="headerlink" title="写博客的目的"></a>写博客的目的</h1><p>在今年9月我进入了研究生的学习生涯，在短短几天的接触过程中，我发现了身边有许多大佬级别的人物，这也使得我不得如此这样的环境下再像本科的浑浑噩噩式生活度日了。在最近翻阅资料的过程中，我开始频繁地访问网友们的博客，并且发现<strong>写博客</strong>是一项非常有意义的工作：</p>
-<h2 id="1、写博客本身就是学习"><a href="#1、写博客本身就是学习" class="headerlink" title="1、写博客本身就是学习"></a>1、写博客本身就是学习</h2><p>在搭建和学习怎么书写博客的同时就会学习到一些交互技术，这些交互技术的成功搭建与运用也折射着一名技术人员的能力。</p>
-<h2 id="2、保持新知识的活力"><a href="#2、保持新知识的活力" class="headerlink" title="2、保持新知识的活力"></a>2、保持新知识的活力</h2><p>写博客的过程就是回顾今天所学的过程，倘若能够坚持将写博客作为一种习惯，那么我相信，知识的学习将不断散发活力。</p>
-<h2 id="3、了解剖析自己的不足"><a href="#3、了解剖析自己的不足" class="headerlink" title="3、了解剖析自己的不足"></a>3、了解剖析自己的不足</h2><p>书写过程中，会萌生出许多想法与思考，反思自己的不足才能促使技术人员的能力提高，这些反思与灵感将会是日后学习工作中的切入点与突破点。</p>
-<h2 id="4、能够学习到MarkDown书写格式"><a href="#4、能够学习到MarkDown书写格式" class="headerlink" title="4、能够学习到MarkDown书写格式"></a>4、能够学习到MarkDown书写格式</h2><p>学到一手Markdown书写格式，写出一段简洁美丽的博文，有益自己也有益他人。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/24/%E5%8D%9A%E5%AE%A2%E5%88%9D%E8%AF%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -836,9 +244,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
