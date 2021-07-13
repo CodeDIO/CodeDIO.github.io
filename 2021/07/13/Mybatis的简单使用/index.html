@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | zhangxys blogs</title>
+  <title>Mybatis的简单使用 | zhangxys blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zhangxys blogs">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="Mybatis的简单使用为什么要使用Mybatis？  在持久层（DAO）开发的原生阶段，被用的最多的中间件为JDBC，其可以通过编写SQL语句实现以程序的视角对数据库进行操作（CRUD）。但在使用的过程中，往往会产生一个问题：为了一个简单需求（即一行SQL语句），需要为其环绕定制一大段代码，不仅工作量大，而且复用性低，耦合度高。于是需要思考，我们为了这简简单单的一行SQL语句费了这么大的力气，真">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis的简单使用">
+<meta property="og:url" content="http://yoursite.com/2021/07/13/Mybatis的简单使用/index.html">
 <meta property="og:site_name" content="zhangxys blogs">
+<meta property="og:description" content="Mybatis的简单使用为什么要使用Mybatis？  在持久层（DAO）开发的原生阶段，被用的最多的中间件为JDBC，其可以通过编写SQL语句实现以程序的视角对数据库进行操作（CRUD）。但在使用的过程中，往往会产生一个问题：为了一个简单需求（即一行SQL语句），需要为其环绕定制一大段代码，不仅工作量大，而且复用性低，耦合度高。于是需要思考，我们为了这简简单单的一行SQL语句费了这么大的力气，真">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-07-13T09:03:58.974Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhangxys blogs">
+<meta name="twitter:title" content="Mybatis的简单使用">
+<meta name="twitter:description" content="Mybatis的简单使用为什么要使用Mybatis？  在持久层（DAO）开发的原生阶段，被用的最多的中间件为JDBC，其可以通过编写SQL语句实现以程序的视角对数据库进行操作（CRUD）。但在使用的过程中，往往会产生一个问题：为了一个简单需求（即一行SQL语句），需要为其环绕定制一大段代码，不仅工作量大，而且复用性低，耦合度高。于是需要思考，我们为了这简简单单的一行SQL语句费了这么大的力气，真">
   
     <link rel="alternative" href="/atom.xml" title="zhangxys blogs" type="application/atom+xml">
   
@@ -150,302 +154,172 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Mybatis的简单使用" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Mybatis的简单使用
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/13/Mybatis的简单使用/" class="archive-article-date">
+
+        
+        <a href="/2021/07/13/Mybatis的简单使用/" class="archive-article-date">
   	<time datetime="2021-07-13T09:03:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-13</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/13/Mybatis的简单使用/">Mybatis的简单使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+        
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
+        <h1 id="Mybatis的简单使用"><a href="#Mybatis的简单使用" class="headerlink" title="Mybatis的简单使用"></a>Mybatis的简单使用</h1><h2 id="为什么要使用Mybatis？"><a href="#为什么要使用Mybatis？" class="headerlink" title="为什么要使用Mybatis？"></a>为什么要使用Mybatis？</h2><hr>
+<blockquote>
+<p>在持久层（DAO）开发的原生阶段，被用的最多的中间件为JDBC，其可以通过编写SQL语句实现以程序的视角对数据库进行操作（CRUD）。但在使用的过程中，往往会产生一个问题：为了一个简单需求（即一行SQL语句），需要为其环绕定制一大段代码，不仅工作量大，而且复用性低，耦合度高。于是需要思考，我们为了这简简单单的一行SQL语句费了这么大的力气，真的有效率吗。Mybatis就是为了优化抑或解决这个问题而产生的。</p>
+</blockquote>
+<p>Mybatis是一款优秀的持久层框架，它可以避免几乎所有的JDBC代码和手动设置参数的过程，而采用注解或者XML文件来配置注入映射的信息。将接口和POJO（Plain Old Java Object）映射成数据库中的记录信息。这可以使我们将关注点放在SQL语句的编写上，而不是为其周遭的配置苦恼。</p>
+<h2 id="配置操作"><a href="#配置操作" class="headerlink" title="配置操作"></a>配置操作</h2><p>想要使用Mybatis只需要将其maven的引入格式放在dependency中即可，其格式如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">version</span>&gt;</span>x.x.x<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>XML配置文件（configuration XML）中包含了对Mybatis的核心配置，也就是说通过其配置可以让Mybatis按照我们的配置进行操作，主要的配置对象就是数据库相关：一个是获取数据库链接实例的数据源（DataSource）和决定事务作用域和控制方式的事务管理器（TransactionManger）。以下是配置文件的简单示例：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="meta"> PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="meta"> "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"$&#123;driver&#125;"</span>/&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;url&#125;"</span>/&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;username&#125;"</span>/&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;password&#125;"</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"org/mybatis/example/BlogMapper.xml"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有了XML文件之后，需要将其引入使用其中的配置信息，每个基于Mybatis的应用都是以一个<strong>SqlSessionFactory</strong>的实例为中心的。<strong>SqlSessionFactory</strong>的实例可以通过<strong>SqlSessionFactoryBuilder</strong>获得。<strong>SqlSessionFactoryBuilder</strong>可以通过我们之前配置的XML信息进行引入,使用模板如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String resource = <span class="string">"org/mybatis/example/mybatis-config.xml"</span>;</span><br><span class="line">InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br></pre></td></tr></table></figure>
+
+<p>在上边已经解释过：有了<strong>SqlSessionFactory</strong>就可以使用其进行生成一个<strong>SqlSession</strong>，于是我们就拥有了<strong>SqlSession</strong>的一个实例。<strong>SqlSession</strong>完全包含了面向数据库执行SQL命令的所有方法。</p>
+<hr>
+<p>进行了上述的初始化之后，我们就拥有了一个开发数据库的前提，Mybatis一共有两种方法进行数据库的操作：其一是XML文件配置开发，其二是注解式开发。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/24/如何让spyder编写的代码自动格式化/" class="archive-article-date">
-  	<time datetime="2019-11-24T10:15:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/24/如何让spyder编写的代码自动格式化/">如何让spyder编写的代码自动格式化</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2021/07/13/Mybatis的简单使用/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/23/正则表达式的书写/" class="archive-article-date">
-  	<time datetime="2019-11-23T11:28:25.986Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-23</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/24/如何让spyder编写的代码自动格式化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何让spyder编写的代码自动格式化</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/23/正则表达式的书写/">正则表达式的书写</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/14/有关于python数字图像处理出现矩阵相减没有负数（值都在0-255）的情况分析/" class="archive-article-date">
-  	<time datetime="2019-10-14T06:14:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/14/有关于python数字图像处理出现矩阵相减没有负数（值都在0-255）的情况分析/">有关于python数字图像处理出现矩阵相减没有负数（值都在0-255）的情况分析</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/07/tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释/" class="archive-article-date">
-  	<time datetime="2019-10-07T13:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/07/tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释/">tensorflow的奇妙下划线，形如（_，变量）变量命名操作的解释</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/29/python语法：_作为函数中参数调用/" class="archive-article-date">
-  	<time datetime="2019-09-29T12:38:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/29/python语法：_作为函数中参数调用/">python中*号的作用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/27/解决jupyter打开之后不能直接跳转到浏览器的问题/" class="archive-article-date">
-  	<time datetime="2019-09-27T05:19:58.704Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/27/解决jupyter打开之后不能直接跳转到浏览器的问题/">解决打开jupyter后不能直接跳转到浏览器的问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/27/《pytorch深度学习原理与pytorch实战》第三章 单车预测器1.0勘误（可能版本有别）/" class="archive-article-date">
-  	<time datetime="2019-09-27T03:53:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/27/《pytorch深度学习原理与pytorch实战》第三章 单车预测器1.0勘误（可能版本有别）/">《pytorch深度学习原理与pytorch实战》第三章 单车预测器1.0勘误（可能版本有别）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/24/博客初识/" class="archive-article-date">
-  	<time datetime="2019-09-24T14:35:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/24/博客初识/">博客初识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/14/hello-world/" class="archive-article-date">
-  	<time datetime="2019-09-14T10:44:12.750Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/14/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -468,8 +342,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

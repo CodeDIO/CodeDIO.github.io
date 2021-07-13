@@ -152,6 +152,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Mybatis的简单使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/13/Mybatis的简单使用/">Mybatis的简单使用</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/13/Mybatis的简单使用/" class="archive-article-date">
+  	<time datetime="2021-07-13T09:03:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Mybatis的简单使用"><a href="#Mybatis的简单使用" class="headerlink" title="Mybatis的简单使用"></a>Mybatis的简单使用</h1><h2 id="为什么要使用Mybatis？"><a href="#为什么要使用Mybatis？" class="headerlink" title="为什么要使用Mybatis？"></a>为什么要使用Mybatis？</h2><hr>
+<blockquote>
+<p>在持久层（DAO）开发的原生阶段，被用的最多的中间件为JDBC，其可以通过编写SQL语句实现以程序的视角对数据库进行操作（CRUD）。但在使用的过程中，往往会产生一个问题：为了一个简单需求（即一行SQL语句），需要为其环绕定制一大段代码，不仅工作量大，而且复用性低，耦合度高。于是需要思考，我们为了这简简单单的一行SQL语句费了这么大的力气，真的有效率吗。Mybatis就是为了优化抑或解决这个问题而产生的。</p>
+</blockquote>
+<p>Mybatis是一款优秀的持久层框架，它可以避免几乎所有的JDBC代码和手动设置参数的过程，而采用注解或者XML文件来配置注入映射的信息。将接口和POJO（Plain Old Java Object）映射成数据库中的记录信息。这可以使我们将关注点放在SQL语句的编写上，而不是为其周遭的配置苦恼。</p>
+<h2 id="配置操作"><a href="#配置操作" class="headerlink" title="配置操作"></a>配置操作</h2><p>想要使用Mybatis只需要将其maven的引入格式放在dependency中即可，其格式如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">version</span>&gt;</span>x.x.x<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>XML配置文件（configuration XML）中包含了对Mybatis的核心配置，也就是说通过其配置可以让Mybatis按照我们的配置进行操作，主要的配置对象就是数据库相关：一个是获取数据库链接实例的数据源（DataSource）和决定事务作用域和控制方式的事务管理器（TransactionManger）。以下是配置文件的简单示例：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="meta"> PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="meta"> "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"$&#123;driver&#125;"</span>/&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;url&#125;"</span>/&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;username&#125;"</span>/&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;password&#125;"</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"org/mybatis/example/BlogMapper.xml"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有了XML文件之后，需要将其引入使用其中的配置信息，每个基于Mybatis的应用都是以一个<strong>SqlSessionFactory</strong>的实例为中心的。<strong>SqlSessionFactory</strong>的实例可以通过<strong>SqlSessionFactoryBuilder</strong>获得。<strong>SqlSessionFactoryBuilder</strong>可以通过我们之前配置的XML信息进行引入,使用模板如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String resource = <span class="string">"org/mybatis/example/mybatis-config.xml"</span>;</span><br><span class="line">InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br></pre></td></tr></table></figure>
+
+<p>在上边已经解释过：有了<strong>SqlSessionFactory</strong>就可以使用其进行生成一个<strong>SqlSession</strong>，于是我们就拥有了<strong>SqlSession</strong>的一个实例。<strong>SqlSession</strong>完全包含了面向数据库执行SQL命令的所有方法。</p>
+<hr>
+<p>进行了上述的初始化之后，我们就拥有了一个开发数据库的前提，Mybatis一共有两种方法进行数据库的操作：其一是XML文件配置开发，其二是注解式开发。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/13/Mybatis的简单使用/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-如何让spyder编写的代码自动格式化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
